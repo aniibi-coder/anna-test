@@ -3,21 +3,25 @@
 
 /* ── Variables ── */
 :root {
-  --c-bg:        #e0dbd0;
-  --c-main:      #1c1c1a;
-  --c-about:     #b5b2a9;
-  --c-projects:  #5b1f2e;
+  --c-bg:       #ddd7cc;
+  --c-main:     #1e1b17;
+  --c-about:    #bfbab1;
+  --c-projects: #611e2c;
 
-  --t-main:      #ddd9d1;
-  --t-about:     #252319;
-  --t-projects:  #f0e8e3;
+  --t-main:     #d8d4cc;
+  --t-about:    #272420;
+  --t-projects: #f0e8e2;
 
-  --font-serif:  'Cormorant Garamond', Georgia, serif;
-  --font-sans:   'Karla', system-ui, sans-serif;
+  --tab-h:  54px;
+  --peek:   54px;
+  --pad:    42px;
+  --radius: 16px;
 
-  --peek:        62px;   /* visible strip of each non-front folder */
-  --tab-h:       62px;   /* folder header / tab height */
-  --pad-h:       40px;   /* horizontal content padding */
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Karla', system-ui, sans-serif;
+
+  /* SVG noise texture data URI */
+  --noise: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='250'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='250' height='250' filter='url(%23n)' opacity='0.11'/></svg>");
 }
 
 /* ── Base ── */
@@ -28,185 +32,227 @@ html, body {
   background-color: var(--c-bg);
 }
 
-/* subtle paper grain on page */
+/* Page surface texture */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 999;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)' opacity='0.045'/%3E%3C/svg%3E");
+  z-index: 0;
+  background-image: var(--noise);
+  background-repeat: repeat;
+  opacity: 0.55;
 }
 
-/* ── Stage ── */
+/* ── Stage ── starts lower so folders look like they sit on a surface */
 .stage {
-  position: relative;
-  max-width: 860px;
-  width: 100%;
-  height: 100vh;
+  position: fixed;
+  top: 9vh;
+  left: 0; right: 0;
+  bottom: 0;
+  max-width: 900px;
   margin: 0 auto;
+  padding: 0 18px;
+  overflow: visible;
 }
 
-/* ── Folders ── */
+/* ── Folder base ── */
 .folder {
   position: absolute;
-  left: 22px;
-  right: 22px;
+  left: 18px; right: 18px;
   bottom: 0;
-  border-radius: 20px 20px 0 0;
-  overflow: hidden;
-  transition:
-    top 0.68s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.68s ease;
+  transition: top 0.72s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: top;
 }
 
-.folder[data-pos="back"] {
+.folder[data-pos="back"]  { top: 0;                      z-index: 1; }
+.folder[data-pos="mid"]   { top: var(--peek);             z-index: 2; }
+.folder[data-pos="front"] { top: calc(var(--peek) * 2);  z-index: 3; }
+
+/* ── Tab (the sticking-out part) ── */
+.f-tab {
+  position: absolute;
   top: 0;
-  z-index: 1;
-  box-shadow: 0 -4px 24px rgba(0,0,0,0.07);
-}
-.folder[data-pos="mid"] {
-  top: var(--peek);
-  z-index: 2;
-  box-shadow: 0 -6px 30px rgba(0,0,0,0.09);
-}
-.folder[data-pos="front"] {
-  top: calc(var(--peek) * 2);
-  z-index: 3;
-  box-shadow: 0 -10px 48px rgba(0,0,0,0.18);
-}
-
-/* folder colours */
-.f-main     { background: var(--c-main);     color: var(--t-main); }
-.f-about    { background: var(--c-about);    color: var(--t-about); }
-.f-projects { background: var(--c-projects); color: var(--t-projects); }
-
-/* ── Folder header / tab strip ── */
-.folder-header {
   height: var(--tab-h);
+  width: 190px;
+  border-radius: var(--radius) var(--radius) 0 0;
   display: flex;
   align-items: center;
-  padding: 0 var(--pad-h);
+  padding: 0 22px;
   cursor: pointer;
   user-select: none;
-  flex-shrink: 0;
-  position: relative;
-}
-
-/* subtle separator line between header and body */
-.folder-header::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: var(--pad-h);
-  right: var(--pad-h);
-  height: 0.5px;
-  background: currentColor;
-  opacity: 0.1;
-}
-
-.f-label {
-  font-family: var(--font-serif);
-  font-size: 17px;
-  font-weight: 300;
-  letter-spacing: 0.14em;
-  opacity: 0.7;
-  transition: opacity 0.18s;
-}
-
-.folder-header:hover .f-label { opacity: 1; }
-
-/* stagger tab labels so all three are visible when stacked */
-.f-main     .f-label { margin-left: 0; }
-.f-about    .f-label { margin-left: 164px; }
-.f-projects .f-label { margin-left: 328px; }
-
-/* ── Folder content area ── */
-.folder-content {
-  height: calc(100% - var(--tab-h));
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 44px var(--pad-h) 80px;
-  transition: opacity 0.28s ease 0.38s;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(128,128,128,0.2) transparent;
-}
-
-.folder:not([data-pos="front"]) .folder-content {
-  opacity: 0;
-  pointer-events: none;
+  transition: filter 0.18s;
   overflow: hidden;
 }
-.folder[data-pos="front"] .folder-content {
+
+/* Cardboard texture on tab */
+.f-tab::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--noise);
+  background-repeat: repeat;
+  border-radius: inherit;
+  opacity: 0.7;
+}
+
+.f-tab:hover { filter: brightness(1.06); }
+
+/* Tab horizontal positions — left / center / right */
+.f-main     .f-tab { left: 0; }
+.f-about    .f-tab { left: calc(50% - 95px); }
+.f-projects .f-tab { right: 0; }
+
+/* Tab colors */
+.f-main     .f-tab { background: var(--c-main);     color: var(--t-main); }
+.f-about    .f-tab { background: var(--c-about);    color: var(--t-about); }
+.f-projects .f-tab { background: var(--c-projects); color: var(--t-projects); }
+
+/* ── Body (the main folder surface) ── */
+.f-body {
+  position: absolute;
+  top: calc(var(--tab-h) - 4px); /* slight overlap creates seamless join */
+  bottom: 0;
+  left: 0; right: 0;
+  border-radius: var(--radius) var(--radius) 0 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease 0.4s;
+}
+
+/* Cardboard top-edge highlight (simulates thickness) */
+.f-body::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  z-index: 20;
+  pointer-events: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* Cardboard texture overlay on body */
+.f-body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background-image: var(--noise);
+  background-repeat: repeat;
+  opacity: 0.75;
+}
+
+/* Body colors */
+.f-main     .f-body { background: var(--c-main);     color: var(--t-main); }
+.f-about    .f-body { background: var(--c-about);    color: var(--t-about); }
+.f-projects .f-body { background: var(--c-projects); color: var(--t-projects); }
+
+/* Dark folder highlight */
+.f-main     .f-body::before { background: rgba(255,255,255,0.09); }
+.f-projects .f-body::before { background: rgba(255,255,255,0.07); }
+/* Light folder highlight */
+.f-about    .f-body::before { background: rgba(255,255,255,0.5); }
+
+/* Depth shadow under each folder */
+.f-body {
+  box-shadow: 0 -14px 60px rgba(0,0,0,0.22), 0 -2px 8px rgba(0,0,0,0.14);
+}
+.folder[data-pos="front"] .f-body {
+  box-shadow: 0 -20px 80px rgba(0,0,0,0.28), 0 -4px 16px rgba(0,0,0,0.16);
+}
+
+/* Hide content of non-front folders (speed + clarity) */
+.folder:not([data-pos="front"]) .f-body {
+  overflow: hidden;
+}
+.folder:not([data-pos="front"]) .f-scroll {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0s;
+}
+.folder[data-pos="front"] .f-scroll {
   opacity: 1;
+  transition: opacity 0.28s ease 0.44s;
 }
 
-.folder-content::-webkit-scrollbar { width: 3px; }
-.folder-content::-webkit-scrollbar-track { background: transparent; }
-.folder-content::-webkit-scrollbar-thumb {
-  background: rgba(128,128,128,0.25);
-  border-radius: 2px;
+/* ── Scrollable content ── */
+.f-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 52px var(--pad) 100px;
+  z-index: 1;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128,128,128,0.18) transparent;
 }
+.f-scroll::-webkit-scrollbar { width: 3px; }
+.f-scroll::-webkit-scrollbar-thumb { background: rgba(128,128,128,0.22); border-radius: 2px; }
 
-/* ── Sections ── */
-.section { margin-bottom: 52px; }
-.section--first { margin-top: 4px; }
+/* ── Tab label ── */
+.f-label {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  opacity: 0.72;
+  position: relative;
+  z-index: 1;
+  transition: opacity 0.18s;
+}
+.f-tab:hover .f-label { opacity: 1; }
 
-.section-label {
-  font-family: var(--font-sans);
-  font-size: 10px;
+/* ── Section structure ── */
+.section { margin-bottom: 56px; }
+.section--first { margin-top: 0; }
+
+.sec-label {
+  font-size: 9.5px;
   font-weight: 500;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  opacity: 0.38;
+  opacity: 0.32;
   margin-bottom: 28px;
   padding-bottom: 14px;
   position: relative;
 }
-
-.section-label::after {
+.sec-label::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  bottom: 0; left: 0; right: 0;
   height: 0.5px;
   background: currentColor;
-  opacity: 0.28;
+  opacity: 0.22;
 }
 
-/* ═══════════════════════════════
-   MAIN folder
-═══════════════════════════════ */
-
-.hero {
-  padding-top: 12px;
-  margin-bottom: 64px;
-}
+/* ════════════════════
+   MAIN
+════════════════════ */
+.hero { margin-bottom: 68px; }
 
 .hero h1 {
   font-family: var(--font-serif);
-  font-size: 66px;
+  font-size: 68px;
   font-weight: 300;
-  line-height: 0.93;
+  line-height: 0.92;
   letter-spacing: -0.01em;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .hero-title {
-  font-size: 10.5px;
-  letter-spacing: 0.24em;
+  font-size: 10px;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  opacity: 0.4;
-  margin-bottom: 22px;
+  opacity: 0.35;
+  margin-bottom: 24px;
 }
 
 .hero-bio {
-  font-size: 14.5px;
-  line-height: 1.75;
-  opacity: 0.68;
-  max-width: 460px;
+  font-size: 14px;
+  line-height: 1.78;
+  opacity: 0.62;
+  max-width: 430px;
   margin-bottom: 22px;
 }
 
@@ -214,196 +260,135 @@ body::before {
   display: flex;
   gap: 10px;
   align-items: center;
-  font-size: 12.5px;
-  opacity: 0.48;
+  font-size: 12px;
+  opacity: 0.42;
 }
+.hero-contacts a { color: inherit; text-decoration: none; transition: opacity 0.18s; }
+.hero-contacts a:hover { opacity: 0.65; }
+.dot { opacity: 0.3; }
 
-.hero-contacts a {
-  color: inherit;
-  text-decoration: none;
-  transition: opacity 0.18s;
-}
-.hero-contacts a:hover { opacity: 0.6; }
-.dot { opacity: 0.35; }
-
-/* jobs */
-.job { margin-bottom: 36px; }
+.job { margin-bottom: 38px; }
 
 .job-top {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
+  gap: 12px;
 }
 
-.job-name {
+.job-co {
   font-family: var(--font-serif);
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 400;
 }
 
 .job-date {
-  font-size: 11px;
-  opacity: 0.38;
+  font-size: 10.5px;
+  opacity: 0.34;
   letter-spacing: 0.06em;
   flex-shrink: 0;
-  margin-left: 16px;
 }
 
 .job-role {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 15px;
-  opacity: 0.52;
+  opacity: 0.48;
   margin-bottom: 14px;
 }
 
-.job-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
+.job-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .job-list li {
-  font-size: 13.5px;
-  line-height: 1.55;
-  opacity: 0.65;
+  font-size: 13px;
+  line-height: 1.58;
+  opacity: 0.6;
   padding-left: 20px;
   position: relative;
 }
-
 .job-list li::before {
   content: '—';
   position: absolute;
   left: 0;
-  opacity: 0.35;
+  opacity: 0.3;
   font-size: 11px;
   top: 2px;
 }
 
-/* education */
-.edu-uni {
+.edu-uni { font-family: var(--font-serif); font-size: 26px; font-weight: 400; margin-bottom: 7px; }
+.edu-deg { font-family: var(--font-serif); font-style: italic; font-size: 15px; opacity: 0.52; margin-bottom: 10px; }
+.edu-desc { font-size: 12.5px; opacity: 0.4; line-height: 1.6; }
+
+/* ════════════════════
+   ABOUT
+════════════════════ */
+.big-text {
   font-family: var(--font-serif);
   font-size: 24px;
   font-weight: 400;
-  margin-bottom: 6px;
+  line-height: 1.55;
+  opacity: 0.8;
+  max-width: 500px;
 }
 
-.edu-deg {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 15px;
-  opacity: 0.58;
-  margin-bottom: 10px;
-}
+.tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 44px; }
 
-.edu-desc {
-  font-size: 13px;
-  opacity: 0.45;
-  line-height: 1.6;
-}
-
-/* ═══════════════════════════════
-   ABOUT folder
-═══════════════════════════════ */
-
-.big-text {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 1.58;
-  opacity: 0.82;
-  max-width: 520px;
-}
-
-.tools-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 28px 48px;
-}
-
-.tool-gname {
-  font-size: 10px;
-  letter-spacing: 0.18em;
+.tg-name {
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  opacity: 0.4;
-  margin-bottom: 10px;
+  opacity: 0.36;
+  margin-bottom: 11px;
 }
 
-.tool-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
+.tool-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .tool-tags span {
-  font-size: 12.5px;
+  font-size: 12px;
   padding: 5px 14px;
   border: 0.5px solid currentColor;
   border-radius: 100px;
-  opacity: 0.65;
+  opacity: 0.6;
   line-height: 1.3;
 }
 
 .langs { display: flex; flex-direction: column; }
-
 .lang-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding: 14px 0;
+  padding: 15px 0;
   border-bottom: 0.5px solid currentColor;
-  opacity: 0.78;
+  opacity: 0.75;
 }
 .lang-row:first-child { border-top: 0.5px solid currentColor; }
-
-.lang-n {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 400;
-}
-
-.lang-l {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  opacity: 0.52;
-}
+.lang-n { font-family: var(--font-serif); font-size: 24px; font-weight: 400; }
+.lang-l { font-size: 10.5px; letter-spacing: 0.12em; opacity: 0.5; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-
 .chip {
-  font-size: 12.5px;
+  font-size: 12px;
   padding: 7px 18px;
   border: 0.5px solid currentColor;
   border-radius: 100px;
-  opacity: 0.68;
+  opacity: 0.65;
   cursor: default;
   transition: opacity 0.18s;
 }
 .chip:hover { opacity: 1; }
 
-/* ═══════════════════════════════
-   PROJECTS folder
-═══════════════════════════════ */
-
-.proj-intro {
-  padding: 16px 0 52px;
-}
-
-.proj-intro-heading {
+/* ════════════════════
+   PROJECTS
+════════════════════ */
+.proj-intro { padding: 12px 0 52px; }
+.proj-heading {
   font-family: var(--font-serif);
-  font-size: 58px;
+  font-size: 62px;
   font-weight: 300;
-  line-height: 0.93;
-  letter-spacing: -0.01em;
+  line-height: 0.92;
   opacity: 0.88;
 }
 
-.proj-card {
-  padding: 36px 0;
-  border-top: 0.5px solid rgba(255,255,255,0.14);
-}
+.proj-card { padding: 36px 0; border-top: 0.5px solid rgba(255,255,255,0.13); }
 
 .proj-top {
   display: flex;
@@ -413,64 +398,41 @@ body::before {
   gap: 16px;
 }
 
-.proj-name {
-  font-family: var(--font-serif);
-  font-size: 30px;
-  font-weight: 400;
-  flex-shrink: 0;
-}
-
-.proj-type {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 14px;
-  opacity: 0.48;
-  text-align: right;
-}
+.proj-name { font-family: var(--font-serif); font-size: 32px; font-weight: 400; flex-shrink: 0; }
+.proj-type { font-family: var(--font-serif); font-style: italic; font-size: 14px; opacity: 0.45; text-align: right; }
 
 .proj-desc {
-  font-size: 14px;
-  line-height: 1.75;
-  opacity: 0.68;
+  font-size: 13.5px;
+  line-height: 1.76;
+  opacity: 0.64;
   margin-bottom: 18px;
-  max-width: 520px;
+  max-width: 500px;
 }
 
-.proj-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
+.proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .proj-tags span {
-  font-size: 10.5px;
-  letter-spacing: 0.1em;
+  font-size: 10px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 4px 12px;
-  border: 0.5px solid rgba(255,255,255,0.28);
+  padding: 4px 13px;
+  border: 0.5px solid rgba(255,255,255,0.26);
   border-radius: 100px;
-  opacity: 0.62;
+  opacity: 0.58;
 }
 
 /* ── Responsive ── */
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   :root {
-    --peek: 54px;
-    --tab-h: 54px;
-    --pad-h: 24px;
+    --tab-h: 48px;
+    --peek:  48px;
+    --pad:   24px;
   }
-
+  .stage { padding: 0 10px; }
   .folder { left: 10px; right: 10px; }
-  .hero h1 { font-size: 44px; }
-  .proj-intro-heading { font-size: 42px; }
-  .big-text { font-size: 18px; }
-
-  .f-about    .f-label { margin-left: 100px; }
-  .f-projects .f-label { margin-left: 200px; }
-
-  .tools-grid { grid-template-columns: 1fr; gap: 22px; }
-  .job-top { flex-direction: column; gap: 2px; }
-  .proj-top { flex-direction: column; gap: 4px; }
-  .proj-type { text-align: left; }
+  .hero h1 { font-size: 46px; }
+  .proj-heading { font-size: 42px; }
+  .big-text { font-size: 19px; }
+  .tools-grid { grid-template-columns: 1fr; gap: 20px; }
+  .f-about .f-tab { left: calc(50% - 80px); width: 160px; }
 }
 
