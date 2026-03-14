@@ -1,25 +1,39 @@
 :root {
   --page-bg: #ddd7d0;
-  --window-bg: #f1ece5;
-  --window-border: rgba(57, 47, 41, 0.28);
-  --text: #161514;
-  --muted: rgba(22, 21, 20, 0.68);
+  --page-bg-2: #e8e2dc;
+  --window-bg: rgba(244, 239, 233, 0.9);
+  --window-border: rgba(57, 47, 41, 0.24);
+
+  --text: #151413;
+  --muted: rgba(21, 20, 19, 0.62);
+
   --black-folder: #171717;
-  --black-tab: #212121;
+  --black-folder-top: #252525;
+  --black-tab: #262626;
+
   --gray-folder: #a7a79f;
-  --gray-tab: #b7b7af;
+  --gray-folder-top: #bdbcb4;
+  --gray-tab: #bebeb5;
+
   --burgundy-folder: #5b1f2d;
+  --burgundy-folder-top: #7d3348;
   --burgundy-tab: #7a3347;
-  --paper-line: rgba(255, 255, 255, 0.18);
-  --shadow-soft: 0 18px 40px rgba(21, 18, 16, 0.16);
-  --shadow-strong: 0 28px 64px rgba(18, 16, 15, 0.18);
-  --radius-xl: 36px;
-  --radius-lg: 28px;
-  --radius-md: 22px;
-  --stage-h: 1120px;
+
+  --paper-light: rgba(255, 255, 255, 0.24);
+  --paper-dark: rgba(255, 255, 255, 0.08);
+
+  --shadow-soft: 0 18px 40px rgba(24, 19, 17, 0.12);
+  --shadow-medium: 0 26px 58px rgba(20, 16, 15, 0.16);
+  --shadow-strong: 0 34px 82px rgba(17, 14, 13, 0.18);
+
+  --radius-window: 34px;
+  --radius-folder: 40px;
+  --radius-card: 24px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -33,8 +47,8 @@ body {
   font-family: "Inter", sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 20% 0%, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 26%),
-    linear-gradient(180deg, #e6e0da 0%, var(--page-bg) 100%);
+    radial-gradient(circle at 18% 0%, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 26%),
+    linear-gradient(180deg, var(--page-bg-2) 0%, var(--page-bg) 100%);
 }
 
 body::before {
@@ -42,31 +56,32 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.07;
+  opacity: 0.06;
   mix-blend-mode: multiply;
   background-image:
-    repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 4px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.24) 0 1px, transparent 1px 6px);
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.14) 0 1px,
+      transparent 1px 4px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.18) 0 1px,
+      transparent 1px 8px
+    );
 }
 
 .window {
-  width: min(1120px, calc(100% - 36px));
-  margin: 28px auto;
-  padding: 16px 16px 28px;
-  border-radius: 30px;
-  border: 2px solid var(--window-border);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0) 24%),
-    rgba(244, 239, 233, 0.76);
-  box-shadow: var(--shadow-strong);
-  backdrop-filter: blur(8px);
+  width: min(1120px, calc(100% - 40px));
+  margin: 24px auto;
+  padding: 16px 16px 30px;
   position: relative;
   overflow: hidden;
+
+  border: 1.5px solid var(--window-border);
+  border-radius: var(--radius-window);
+  background: var(--window-bg);
+  box-shadow: var(--shadow-strong);
 }
 
 .window::after {
@@ -76,8 +91,12 @@ a {
   pointer-events: none;
   opacity: 0.08;
   background-image:
-    radial-gradient(circle at 30% 20%, rgba(255,255,255,0.7), transparent 18%),
-    repeating-linear-gradient(0deg, rgba(0,0,0,0.2) 0 1px, transparent 1px 3px);
+    radial-gradient(circle at 22% 16%, rgba(255,255,255,0.8), transparent 16%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.18) 0 1px,
+      transparent 1px 3px
+    );
 }
 
 .window-topbar,
@@ -97,8 +116,8 @@ a {
 
 .window-label {
   margin: 0;
-  font-size: 0.86rem;
-  letter-spacing: 0.12em;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
   text-transform: lowercase;
   color: var(--muted);
 }
@@ -118,17 +137,16 @@ a {
   width: 16px;
   height: 16px;
   border-radius: 999px;
-  border: 1.4px solid rgba(35, 31, 28, 0.42);
-  background: rgba(255,255,255,0.38);
+  border: 1.2px solid rgba(36, 32, 29, 0.34);
+  background: rgba(255,255,255,0.32);
 }
 
 .lang-switch {
   display: inline-flex;
   padding: 4px;
   border-radius: 999px;
-  border: 1px solid rgba(40, 34, 31, 0.12);
+  border: 1px solid rgba(40, 34, 31, 0.1);
   background: rgba(255,255,255,0.42);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.45);
 }
 
 .lang-btn {
@@ -137,16 +155,12 @@ a {
   padding: 8px 14px;
   border-radius: 999px;
   font: inherit;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: rgba(22, 21, 20, 0.6);
+  color: rgba(21, 20, 19, 0.56);
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
-}
-
-.lang-btn:hover {
-  transform: translateY(-1px);
+  transition: 0.2s ease;
 }
 
 .lang-btn.is-active {
@@ -155,174 +169,223 @@ a {
 }
 
 .hero {
-  min-height: 170px;
-  padding: 18px 4px 6px;
+  min-height: 180px;
+  padding: 16px 2px 10px;
 }
 
 .hero-kicker {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   color: var(--muted);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
 }
 
 .hero h1 {
   margin: 0;
-  font-size: clamp(3rem, 6vw, 5rem);
-  line-height: 0.95;
-  letter-spacing: -0.05em;
+  font-size: clamp(3.2rem, 6vw, 5.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.065em;
 }
 
 .hero-copy {
-  max-width: 670px;
+  max-width: 650px;
   margin: 14px 0 0;
   line-height: 1.65;
   font-size: 1rem;
-  color: rgba(22, 21, 20, 0.75);
+  color: rgba(21, 20, 19, 0.72);
 }
 
 .folder-stage {
-  height: var(--stage-h);
-  margin-top: 4px;
+  position: relative;
+  min-height: 1380px;
+  margin-top: 8px;
 }
 
+/* БАЗА ПАПОК */
 .folder {
   position: absolute;
   left: 0;
   right: 0;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-soft);
   overflow: visible;
-  transition: transform 0.5s cubic-bezier(.22,1,.36,1), box-shadow 0.45s ease, z-index 0.1s linear;
+  border-radius: var(--radius-folder);
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.55s cubic-bezier(.22,1,.36,1),
+    box-shadow 0.35s ease,
+    z-index 0.2s ease;
+  pointer-events: none;
+}
+
+.folder-tab,
+.folder-body {
+  pointer-events: auto;
 }
 
 .folder-plate {
-  min-height: 350px;
-  border-radius: inherit;
   position: relative;
+  min-height: 390px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: inherit;
 }
 
 .folder-plate::before,
 .paper-card::before,
 .paper-panel::before,
+.project-copy-card::before,
 .fake-shot::before {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.18;
+  opacity: 0.16;
   background-image:
-    linear-gradient(180deg, rgba(255,255,255,0.26), rgba(255,255,255,0) 24%),
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.16) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(90deg, rgba(0,0,0,0.08) 0 1px, transparent 1px 7px);
+    linear-gradient(180deg, rgba(255,255,255,0.24), rgba(255,255,255,0) 24%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.14) 0 1px,
+      transparent 1px 5px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.08) 0 1px,
+      transparent 1px 7px
+    );
 }
 
+/* ТАБЫ — ключ к виду как на рефе */
 .folder-tab {
   position: absolute;
   top: -1px;
-  left: 34px;
-  height: 86px;
-  min-width: 255px;
+  z-index: 6;
+  height: 88px;
+  min-width: 240px;
   padding: 18px 28px 16px;
   border: 0;
   border-radius: 34px 34px 0 0;
   font: inherit;
   font-weight: 800;
-  font-size: clamp(1.25rem, 2vw, 2.05rem);
+  font-size: clamp(1.2rem, 2vw, 2rem);
   line-height: 1;
   text-align: left;
   cursor: pointer;
-  z-index: 5;
-  transition: transform 0.28s ease, filter 0.28s ease;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
 }
 
-.folder-tab:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.03);
+/* мягкий переход таба в корпус папки */
+.folder-tab::after {
+  content: "";
+  position: absolute;
+  right: -52px;
+  bottom: 0;
+  width: 52px;
+  height: 52px;
+  background: inherit;
+  -webkit-mask: radial-gradient(52px at 0 0, transparent 98%, #000 100%);
+  mask: radial-gradient(52px at 0 0, transparent 98%, #000 100%);
 }
 
-.folder-tab span {
-  position: relative;
-  z-index: 1;
+/* добавляем "вырез" слева для более похожей геометрии */
+.folder-tab::before {
+  content: "";
+  position: absolute;
+  left: -34px;
+  bottom: 0;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border-bottom-right-radius: 34px;
+  box-shadow: 12px 12px 0 0 currentColor;
+  opacity: 0.08;
 }
 
 .folder-body {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.55s cubic-bezier(.22,1,.36,1), opacity 0.32s ease, padding 0.35s ease;
-  padding: 0 28px;
+  padding: 0 30px;
+  transition:
+    max-height 0.58s cubic-bezier(.22,1,.36,1),
+    opacity 0.28s ease,
+    padding 0.35s ease;
 }
 
 .folder.is-open {
-  transform: translateY(30px);
-  box-shadow: 0 36px 76px rgba(17, 15, 14, 0.22);
+  box-shadow: var(--shadow-strong);
 }
 
 .folder.is-open .folder-body {
   opacity: 1;
-  padding: 108px 28px 30px;
+  padding: 108px 30px 30px;
 }
 
-.folder-black {
-  top: 470px;
-  z-index: 1;
-}
-
-.folder-black .folder-plate {
-  background: linear-gradient(180deg, #252525 0%, var(--black-folder) 100%);
-  color: #f7f1ec;
-}
-
-.folder-black .folder-tab {
-  background: linear-gradient(180deg, #2a2a2a 0%, var(--black-tab) 100%);
-  color: #f7f1ec;
-}
-
-.folder-gray {
-  top: 235px;
-  z-index: 2;
-}
-
-.folder-gray .folder-plate {
-  background: linear-gradient(180deg, #bab9b1 0%, var(--gray-folder) 100%);
-  color: #171615;
-}
-
-.folder-gray .folder-tab {
-  left: 148px;
-  background: linear-gradient(180deg, #c7c6be 0%, var(--gray-tab) 100%);
-  color: #171615;
-}
-
+/* ПОЗИЦИИ СЛОЁВ */
 .folder-burgundy {
   top: 0;
   z-index: 3;
 }
 
-.folder-burgundy .folder-plate {
-  background: linear-gradient(180deg, #7a3045 0%, var(--burgundy-folder) 100%);
-  color: #fff6f2;
+.folder-gray {
+  top: 270px;
+  z-index: 2;
 }
 
-.folder-burgundy .folder-tab {
-  left: 68px;
-  background: linear-gradient(180deg, #894056 0%, var(--burgundy-tab) 100%);
-  color: #fff6f2;
-}
-
-.folder-black.is-open { z-index: 24; }
-.folder-gray.is-open { z-index: 25; }
-.folder-burgundy.is-open { z-index: 26; }
-
-.folder-content {
-  position: relative;
+.folder-black {
+  top: 540px;
   z-index: 1;
 }
 
+/* ЦВЕТА */
+.folder-burgundy .folder-plate {
+  background: linear-gradient(180deg, var(--burgundy-folder-top) 0%, var(--burgundy-folder) 100%);
+  color: #fff4f1;
+}
+
+.folder-burgundy .folder-tab {
+  left: 340px;
+  background: linear-gradient(180deg, #8b4158 0%, var(--burgundy-tab) 100%);
+  color: #fff4f1;
+}
+
+.folder-gray .folder-plate {
+  background: linear-gradient(180deg, var(--gray-folder-top) 0%, var(--gray-folder) 100%);
+  color: #171615;
+}
+
+.folder-gray .folder-tab {
+  left: 120px;
+  background: linear-gradient(180deg, #c8c7bf 0%, var(--gray-tab) 100%);
+  color: #171615;
+}
+
+.folder-black .folder-plate {
+  background: linear-gradient(180deg, var(--black-folder-top) 0%, var(--black-folder) 100%);
+  color: #f7f1ec;
+}
+
+.folder-black .folder-tab {
+  left: 32px;
+  background: linear-gradient(180deg, #2b2b2b 0%, var(--black-tab) 100%);
+  color: #f7f1ec;
+}
+
+/* АКТИВНАЯ ПАПКА ПРИПОДНИМАЕТСЯ */
+.folder-burgundy.is-open {
+  z-index: 30;
+  transform: translateY(18px);
+}
+
+.folder-gray.is-open {
+  z-index: 31;
+  transform: translateY(18px);
+}
+
+.folder-black.is-open {
+  z-index: 32;
+  transform: translateY(18px);
+}
+
+/* СЕТКИ */
 .info-grid,
 .skills-grid,
 .projects-layout,
@@ -331,34 +394,27 @@ a {
   gap: 18px;
 }
 
-.info-grid {
-  grid-template-columns: 1.15fr 0.85fr;
-}
-
-.info-grid-main {
-  align-items: start;
-}
-
+.info-grid,
 .skills-grid {
-  margin-top: 18px;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.14fr 0.86fr;
+}
+
+.projects-layout {
+  grid-template-columns: 1.12fr 0.88fr;
+  align-items: start;
 }
 
 .tool-columns {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.projects-layout {
-  grid-template-columns: 1.15fr 0.85fr;
-  align-items: start;
-}
-
+/* КАРТОЧКИ */
 .paper-card,
 .paper-panel,
 .project-copy-card {
   position: relative;
-  border-radius: var(--radius-md);
   overflow: hidden;
+  border-radius: var(--radius-card);
 }
 
 .paper-card,
@@ -380,8 +436,8 @@ a {
 
 .light-card,
 .light-panel {
-  background: rgba(255,255,255,0.24);
-  border: 1px solid rgba(21, 17, 14, 0.08);
+  background: rgba(255,255,255,0.26);
+  border: 1px solid rgba(24, 19, 17, 0.08);
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
@@ -390,19 +446,20 @@ a {
   border: 1px solid rgba(255,255,255,0.12);
 }
 
+/* ТЕКСТ */
+h2,
+h3,
+p,
+li {
+  margin-top: 0;
+}
+
 .section-label {
   margin: 0 0 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.76rem;
   opacity: 0.72;
-}
-
-h2,
-h3,
-p,
-li {
-  margin-top: 0;
 }
 
 h2 {
@@ -427,6 +484,7 @@ li {
   list-style: none;
 }
 
+/* СПИСКИ */
 .contact-list li,
 .language-list li,
 .project-meta div {
@@ -442,11 +500,6 @@ li {
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 
-.folder-gray .language-list li,
-.folder-gray .contact-list li {
-  border-bottom-color: rgba(0,0,0,0.08);
-}
-
 .contact-list li:last-child,
 .language-list li:last-child {
   border-bottom: 0;
@@ -457,10 +510,9 @@ li {
   color: rgba(255,255,255,0.66);
 }
 
-.folder-gray .contact-list span,
-.folder-gray .project-meta span,
-.folder-gray .section-label {
-  color: rgba(22, 21, 20, 0.64);
+.folder-gray .section-label,
+.folder-gray .project-meta span {
+  color: rgba(21, 20, 19, 0.62);
 }
 
 .contact-list a {
@@ -469,6 +521,7 @@ li {
   font-weight: 600;
 }
 
+/* ТАЙМЛАЙН */
 .timeline-row {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -492,8 +545,8 @@ li {
 }
 
 .timeline-meta span {
-  opacity: 0.72;
   margin-top: 6px;
+  opacity: 0.72;
 }
 
 .bullets li {
@@ -514,22 +567,23 @@ li {
   height: 7px;
   border-radius: 999px;
   background: currentColor;
-  opacity: 0.6;
+  opacity: 0.58;
 }
 
+/* ТЕГИ */
 .tag-cloud {
-  list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin: 0;
   padding: 0;
+  list-style: none;
 }
 
 .tag-cloud li {
   padding: 10px 14px;
   border-radius: 999px;
-  background: rgba(255,255,255,0.42);
+  background: rgba(255,255,255,0.4);
   border: 1px solid rgba(24, 19, 17, 0.1);
   font-weight: 600;
 }
@@ -547,6 +601,7 @@ li {
   list-style: none;
 }
 
+/* ПРОЕКТЫ */
 .project-showcase {
   display: grid;
   gap: 16px;
@@ -654,17 +709,26 @@ li {
   color: rgba(255,255,255,0.82);
 }
 
+/* АДАПТИВ */
 @media (max-width: 1024px) {
-  :root {
-    --stage-h: 1320px;
+  .folder-stage {
+    min-height: 1640px;
   }
 
-  .folder-black {
-    top: 590px;
+  .folder-burgundy {
+    top: 0;
   }
 
   .folder-gray {
-    top: 300px;
+    top: 360px;
+  }
+
+  .folder-black {
+    top: 740px;
+  }
+
+  .folder-burgundy .folder-tab {
+    left: 220px;
   }
 
   .projects-layout,
@@ -674,17 +738,9 @@ li {
   .timeline-row {
     grid-template-columns: 1fr;
   }
-
-  .timeline-meta {
-    padding-bottom: 8px;
-  }
 }
 
 @media (max-width: 760px) {
-  :root {
-    --stage-h: 1530px;
-  }
-
   .window {
     width: min(100% - 16px, 1000px);
     margin: 10px auto;
@@ -692,19 +748,8 @@ li {
     border-radius: 24px;
   }
 
-  .window-topbar {
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .topbar-right {
-    flex-direction: column-reverse;
-    align-items: flex-end;
-    gap: 10px;
-  }
-
   .hero {
-    min-height: 138px;
+    min-height: 134px;
     padding-top: 14px;
   }
 
@@ -712,25 +757,41 @@ li {
     font-size: 2.7rem;
   }
 
-  .folder {
-    border-radius: 28px;
+  .hero-copy {
+    font-size: 0.96rem;
+  }
+
+  .folder-stage {
+    min-height: 1940px;
+  }
+
+  .folder-burgundy {
+    top: 0;
+  }
+
+  .folder-gray {
+    top: 460px;
+  }
+
+  .folder-black {
+    top: 950px;
   }
 
   .folder-tab {
     left: 18px !important;
-    min-width: 180px;
-    height: 70px;
+    min-width: 186px;
+    height: 72px;
     padding: 16px 20px 12px;
     font-size: 1.18rem;
     border-radius: 24px 24px 0 0;
   }
 
-  .folder-black {
-    top: 710px;
-  }
-
-  .folder-gray {
-    top: 360px;
+  .folder-tab::after {
+    width: 40px;
+    height: 40px;
+    right: -40px;
+    -webkit-mask: radial-gradient(40px at 0 0, transparent 98%, #000 100%);
+    mask: radial-gradient(40px at 0 0, transparent 98%, #000 100%);
   }
 
   .folder.is-open .folder-body {
