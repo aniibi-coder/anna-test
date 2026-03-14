@@ -1,10 +1,5 @@
-/**
- * Folder switcher
- * stack[0] = back, stack[1] = mid, stack[2] = front (active)
- */
-
 const POSITIONS = ['back', 'mid', 'front'];
-let stack = ['main', 'about', 'projects']; // initial order
+let stack = ['main', 'about', 'projects'];
 
 function render() {
   stack.forEach((id, i) => {
@@ -14,20 +9,10 @@ function render() {
 }
 
 function openFolder(id) {
-  const i = stack.indexOf(id);
-  if (i === 2) return; // already front — do nothing
-  stack.splice(i, 1);
+  if (stack.indexOf(id) === 2) return;
+  stack.splice(stack.indexOf(id), 1);
   stack.push(id);
   render();
 }
 
-// Also allow clicking anywhere on a non-front folder's visible header strip
-document.querySelectorAll('.folder-header').forEach(header => {
-  header.addEventListener('click', () => {
-    const id = header.closest('.folder').dataset.id;
-    openFolder(id);
-  });
-});
-
 render();
-
