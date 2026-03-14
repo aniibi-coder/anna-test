@@ -1,396 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Anna Gudkova — Portfolio</title>
-  <meta
-    name="description"
-    content="Layered folder portfolio website for Anna Gudkova, Marketing Manager."
-  />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anna Gudkova — Marketing Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Karla:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="window">
-    <header class="window-topbar">
-      <p class="window-label" data-i18n="windowLabel">folder portfolio</p>
 
-      <div class="topbar-right">
-        <div class="lang-switch" aria-label="Language switcher">
-          <button class="lang-btn is-active" type="button" data-lang="en">EN</button>
-          <button class="lang-btn" type="button" data-lang="ru">RU</button>
-        </div>
+  <div class="stage">
 
-        <div class="window-dots" aria-hidden="true">
-          <span></span>
-          <span></span>
-        </div>
+    <!-- ── Folder 1: Main (charcoal) ── -->
+    <div class="folder f-main" data-id="main" data-pos="back">
+      <div class="folder-header" onclick="openFolder('main')">
+        <span class="f-label">main</span>
       </div>
-    </header>
+      <div class="folder-content">
 
-    <section class="hero">
-      <p class="hero-kicker" data-i18n="heroKicker">
-        Marketing Manager / Digital Promotion
-      </p>
+        <div class="hero">
+          <h1>Anna<br>Gudkova</h1>
+          <p class="hero-title">Marketing Manager</p>
+          <p class="hero-bio">Digital Marketing Manager with one year of experience in the IT industry, specialising in brand promotion across SEO, social media, and PPC advertising. Open to remote, hybrid, and office roles.</p>
+          <div class="hero-contacts">
+            <a href="mailto:gudkova158@gmail.com">gudkova158@gmail.com</a>
+            <span class="dot">·</span>
+            <a href="https://linkedin.com/in/anna-gudkova10" target="_blank">@anna-gudkova10</a>
+          </div>
+        </div>
 
-      <h1>Anna Gudkova</h1>
+        <section class="section">
+          <h2 class="section-label">Work experience</h2>
 
-      <p class="hero-copy" data-i18n="heroCopy">
-        Open any folder tab to explore experience, skills, and projects.
-      </p>
-    </section>
+          <div class="job">
+            <div class="job-top">
+              <span class="job-name">Tonfotos</span>
+              <span class="job-date">Mar 2025 — present</span>
+            </div>
+            <div class="job-role">Marketing Manager</div>
+            <ul class="job-list">
+              <li>SEO — multilingual semantic cores, blog traffic analysis, VS Code article formatting</li>
+              <li>Outreach & link building with partner companies</li>
+              <li>Internal marketing strategy based on audience research and competitive analysis</li>
+              <li>Guerrilla marketing campaign on Reddit</li>
+              <li>Recruitment marketing via Fiverr</li>
+            </ul>
+          </div>
 
-    <section class="folder-stage" aria-label="Portfolio folders">
-      <!-- BORDEAUX / PROJECTS -->
-      <article class="folder folder-burgundy" data-folder="projects">
-        <button class="folder-tab" type="button" aria-expanded="false">
-          <span data-i18n="tabProjects">Projects</span>
-        </button>
+          <div class="job">
+            <div class="job-top">
+              <span class="job-name">Exlibris</span>
+              <span class="job-date">Sep — Nov 2025</span>
+            </div>
+            <div class="job-role">Marketing Manager · project-based</div>
+            <ul class="job-list">
+              <li>Targeted advertising on VK and Telegram — built, launched, and analysed campaigns</li>
+              <li>SMM — visual and textual content creation, KPI tracking</li>
+              <li>Landing page design and build via Tilda</li>
+            </ul>
+          </div>
 
-        <div class="folder-plate">
-          <div class="folder-body">
-            <div class="folder-content">
-              <div class="projects-layout">
-                <section class="project-showcase">
-                  <div class="fake-shot shot-main">
-                    <div class="shot-ui">
-                      <span></span>
-                      <span></span>
-                      <span></span>
-                    </div>
-                    <div class="shot-glow"></div>
-                    <div class="shot-caption" data-i18n="projectShotCaption">
-                      replace with game screenshot
-                    </div>
-                  </div>
+          <div class="job">
+            <div class="job-top">
+              <span class="job-name">Smart Marketing</span>
+              <span class="job-date">Feb 2025</span>
+            </div>
+            <div class="job-role">SEO Intern</div>
+            <ul class="job-list">
+              <li>Semantic core cleanup and structuring</li>
+              <li>Search query clustering</li>
+              <li>Search frequency analysis</li>
+            </ul>
+          </div>
+        </section>
 
-                  <div class="showcase-strip">
-                    <div class="fake-shot shot-small shot-a"></div>
-                    <div class="fake-shot shot-small shot-b"></div>
-                    <div class="fake-shot shot-small shot-c"></div>
-                  </div>
-                </section>
+        <section class="section">
+          <h2 class="section-label">Education</h2>
+          <div class="edu">
+            <div class="edu-uni">Kazan Federal University</div>
+            <div class="edu-deg">Bachelor in Advertising & PR · 2021 — 2025</div>
+            <p class="edu-desc">Marketing · Advertising · PR (Public Relations) · Politics & Sociology</p>
+          </div>
+        </section>
 
-                <section class="project-copy-card">
-                  <p class="section-label" data-i18n="sectionFeaturedProject">
-                    Featured project
-                  </p>
+      </div>
+    </div>
 
-                  <h2>Exlibris</h2>
+    <!-- ── Folder 2: About (warm grey) ── -->
+    <div class="folder f-about" data-id="about" data-pos="mid">
+      <div class="folder-header" onclick="openFolder('about')">
+        <span class="f-label">about</span>
+      </div>
+      <div class="folder-content">
 
-                  <p data-i18n="projectText1">
-                    A startup video game project designed to increase interest in
-                    classic literature among young people.
-                  </p>
+        <section class="section section--first">
+          <h2 class="section-label">Who I am</h2>
+          <p class="big-text">I love finding creative ways to grow brands online. I thrive at the intersection of data and creative strategy — turning insights into campaigns that actually work.</p>
+        </section>
 
-                  <p data-i18n="projectText2">
-                    Anna worked on promotion strategy, targeted ads, SMM, and the
-                    landing page for browser-based acquisition.
-                  </p>
-
-                  <div class="project-meta">
-                    <div>
-                      <span data-i18n="projectRoleLabel">Role</span>
-                      <strong data-i18n="projectRoleValue">Marketing Manager</strong>
-                    </div>
-
-                    <div>
-                      <span data-i18n="projectChannelsLabel">Channels</span>
-                      <strong>VK / Telegram / Tilda</strong>
-                    </div>
-
-                    <div>
-                      <span data-i18n="projectFocusLabel">Focus</span>
-                      <strong data-i18n="projectFocusValue">
-                        Ads, SMM, landing page
-                      </strong>
-                    </div>
-                  </div>
-
-                  <div class="project-note" data-i18n="projectNote">
-                    Add real screenshots from the game, social media creatives, or
-                    the landing page here.
-                  </div>
-                </section>
+        <section class="section">
+          <h2 class="section-label">Tools & programs</h2>
+          <div class="tools-grid">
+            <div class="tool-group">
+              <div class="tool-gname">Traffic analysis</div>
+              <div class="tool-tags">
+                <span>Google Search Console</span>
+                <span>Ahrefs</span>
+              </div>
+            </div>
+            <div class="tool-group">
+              <div class="tool-gname">Visual content</div>
+              <div class="tool-tags">
+                <span>Figma</span>
+                <span>Canva</span>
+                <span>Photoshop</span>
+              </div>
+            </div>
+            <div class="tool-group">
+              <div class="tool-gname">Data & writing</div>
+              <div class="tool-tags">
+                <span>Google Sheets</span>
+                <span>Google Docs</span>
+              </div>
+            </div>
+            <div class="tool-group">
+              <div class="tool-gname">Coding</div>
+              <div class="tool-tags">
+                <span>VS Code</span>
               </div>
             </div>
           </div>
-        </div>
-      </article>
+        </section>
 
-      <!-- GRAY / ABOUT -->
-      <article class="folder folder-gray" data-folder="about">
-        <button class="folder-tab" type="button" aria-expanded="false">
-          <span data-i18n="tabAbout">About / Skills</span>
-        </button>
-
-        <div class="folder-plate">
-          <div class="folder-body">
-            <div class="folder-content">
-              <div class="info-grid">
-                <section class="paper-card light-card">
-                  <p class="section-label" data-i18n="sectionAbout">About me</p>
-
-                  <h2 data-i18n="aboutTitle">
-                    Structured marketing with a creative angle
-                  </h2>
-
-                  <p data-i18n="aboutText1">
-                    Anna combines performance thinking with content sensitivity.
-                    She likes to build clear promotion systems, work with audience
-                    research, and turn brand ideas into practical digital campaigns.
-                  </p>
-
-                  <p data-i18n="aboutText2">
-                    Her strongest interests are IT products, digital communities,
-                    game-related projects, and visual communication.
-                  </p>
-                </section>
-
-                <section class="paper-card light-card">
-                  <p class="section-label" data-i18n="sectionStrengths">
-                    Key strengths
-                  </p>
-
-                  <ul class="tag-cloud">
-                    <li>SEO</li>
-                    <li>SMM</li>
-                    <li>PPC</li>
-                    <li>Outreach</li>
-                    <li data-i18n="skillLanding">Landing pages</li>
-                    <li data-i18n="skillResearch">Audience research</li>
-                    <li data-i18n="skillContent">Content planning</li>
-                    <li data-i18n="skillAnalytics">Campaign analytics</li>
-                  </ul>
-                </section>
-              </div>
-
-              <div class="skills-grid">
-                <section class="paper-panel light-panel">
-                  <p class="section-label" data-i18n="sectionTools">Tools</p>
-
-                  <div class="tool-columns">
-                    <article class="tool-group">
-                      <h3 data-i18n="toolSeoTitle">Traffic &amp; SEO</h3>
-                      <p>Google Search Console, Ahrefs</p>
-                    </article>
-
-                    <article class="tool-group">
-                      <h3 data-i18n="toolVisualTitle">Visual content</h3>
-                      <p>Figma, Canva, Photoshop</p>
-                    </article>
-
-                    <article class="tool-group">
-                      <h3 data-i18n="toolDocsTitle">Documents &amp; data</h3>
-                      <p>Google Sheets, Google Docs</p>
-                    </article>
-
-                    <article class="tool-group">
-                      <h3 data-i18n="toolCodeTitle">Code</h3>
-                      <p>Visual Studio Code</p>
-                    </article>
-                  </div>
-                </section>
-
-                <section class="paper-panel light-panel">
-                  <p class="section-label" data-i18n="sectionLanguages">
-                    Languages
-                  </p>
-
-                  <ul class="language-list">
-                    <li>
-                      <strong data-i18n="langRussian">Russian</strong>
-                      <span data-i18n="langNative">Native</span>
-                    </li>
-                    <li>
-                      <strong data-i18n="langEnglish">English</strong>
-                      <span>B2</span>
-                    </li>
-                    <li>
-                      <strong data-i18n="langFrench">French</strong>
-                      <span>A1</span>
-                    </li>
-                    <li>
-                      <strong data-i18n="langGerman">German</strong>
-                      <span>A1</span>
-                    </li>
-                  </ul>
-                </section>
-              </div>
+        <section class="section">
+          <h2 class="section-label">Languages</h2>
+          <div class="langs">
+            <div class="lang-row">
+              <span class="lang-n">Russian</span>
+              <span class="lang-l">Native</span>
+            </div>
+            <div class="lang-row">
+              <span class="lang-n">English</span>
+              <span class="lang-l">B2</span>
+            </div>
+            <div class="lang-row">
+              <span class="lang-n">French</span>
+              <span class="lang-l">A1</span>
+            </div>
+            <div class="lang-row">
+              <span class="lang-n">German</span>
+              <span class="lang-l">A1</span>
             </div>
           </div>
+        </section>
+
+        <section class="section">
+          <h2 class="section-label">Key strengths</h2>
+          <div class="chips">
+            <span class="chip">SEO Strategy</span>
+            <span class="chip">Content Creation</span>
+            <span class="chip">Social Media</span>
+            <span class="chip">PPC Advertising</span>
+            <span class="chip">Analytics & KPIs</span>
+            <span class="chip">Brand Promotion</span>
+            <span class="chip">Campaign Management</span>
+            <span class="chip">Link Building</span>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- ── Folder 3: Projects (burgundy) ── -->
+    <div class="folder f-projects" data-id="projects" data-pos="front">
+      <div class="folder-header" onclick="openFolder('projects')">
+        <span class="f-label">projects</span>
+      </div>
+      <div class="folder-content">
+
+        <div class="proj-intro">
+          <div class="proj-intro-heading">Selected<br>work</div>
         </div>
-      </article>
 
-      <!-- BLACK / MAIN -->
-      <article class="folder folder-black" data-folder="main">
-        <button class="folder-tab" type="button" aria-expanded="false">
-          <span data-i18n="tabMain">Main / Resume</span>
-        </button>
-
-        <div class="folder-plate">
-          <div class="folder-body">
-            <div class="folder-content">
-              <div class="info-grid">
-                <section class="paper-card dark-card">
-                  <p class="section-label" data-i18n="sectionProfile">Profile</p>
-
-                  <h2 data-i18n="mainRole">Marketing Manager</h2>
-
-                  <p data-i18n="mainIntro1">
-                    Digital Marketing Manager with experience in the IT industry,
-                    focused on SEO, social media, PPC advertising, and brand
-                    promotion strategy.
-                  </p>
-
-                  <p data-i18n="mainIntro2">
-                    Open to remote, office-based, and hybrid opportunities.
-                  </p>
-                </section>
-
-                <section class="paper-card dark-card">
-                  <p class="section-label" data-i18n="sectionContact">Contact</p>
-
-                  <ul class="plain-list contact-list">
-                    <li>
-                      <span data-i18n="contactEmail">Email</span>
-                      <a href="mailto:gudkova158@gmail.com">gudkova158@gmail.com</a>
-                    </li>
-                    <li>
-                      <span>Telegram</span>
-                      <a
-                        href="https://t.me/anna_gudkova10"
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        @anna_gudkova10
-                      </a>
-                    </li>
-                    <li>
-                      <span data-i18n="contactFormat">Format</span>
-                      <strong data-i18n="contactFormatValue">
-                        Remote / Office / Hybrid
-                      </strong>
-                    </li>
-                  </ul>
-                </section>
-              </div>
-
-              <div class="paper-panel dark-panel">
-                <p class="section-label" data-i18n="sectionEducation">
-                  Education
-                </p>
-
-                <article class="timeline-row dark-row">
-                  <div class="timeline-meta">
-                    <p data-i18n="educationPeriod">September 2021 — July 2025</p>
-                    <span data-i18n="educationDegree">
-                      Bachelor in Advertising &amp; PR
-                    </span>
-                  </div>
-
-                  <div class="timeline-copy">
-                    <h3 data-i18n="educationTitle">
-                      Kazan Federal University (KFU), Kazan, Russia
-                    </h3>
-                    <p data-i18n="educationText">
-                      During her studies, Anna focused on marketing, advertising,
-                      public relations, politics, and sociology.
-                    </p>
-                  </div>
-                </article>
-              </div>
-
-              <div class="paper-panel dark-panel">
-                <p class="section-label" data-i18n="sectionExperience">
-                  Work experience
-                </p>
-
-                <article class="timeline-row dark-row">
-                  <div class="timeline-meta">
-                    <p>Tonfotos</p>
-                    <span data-i18n="tonfotosPeriod">March 2025 — present</span>
-                  </div>
-
-                  <div class="timeline-copy">
-                    <h3 data-i18n="tonfotosRole">Marketing Manager</h3>
-                    <ul class="plain-list bullets">
-                      <li data-i18n="tonfotos1">
-                        SEO optimization and multilingual semantic core creation.
-                      </li>
-                      <li data-i18n="tonfotos2">
-                        Blog traffic analysis and article formatting in Visual Studio Code.
-                      </li>
-                      <li data-i18n="tonfotos3">
-                        Outreach, link-building, and partner communication.
-                      </li>
-                      <li data-i18n="tonfotos4">
-                        Internal marketing strategy based on audience, market, and competitors.
-                      </li>
-                      <li data-i18n="tonfotos5">
-                        Guerrilla marketing on Reddit and recruitment support via Fiverr.
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-
-                <article class="timeline-row dark-row">
-                  <div class="timeline-meta">
-                    <p>Exlibris</p>
-                    <span data-i18n="exlibrisPeriod">
-                      September 2025 — November 2025
-                    </span>
-                  </div>
-
-                  <div class="timeline-copy">
-                    <h3 data-i18n="exlibrisRole">
-                      Marketing Manager (project-based)
-                    </h3>
-                    <ul class="plain-list bullets">
-                      <li data-i18n="exlibris1">
-                        Built and analyzed targeted advertising campaigns on VK and Telegram.
-                      </li>
-                      <li data-i18n="exlibris2">
-                        Managed SMM content and monitored project KPIs.
-                      </li>
-                      <li data-i18n="exlibris3">
-                        Created a landing page for browser-based promotion in Tilda.
-                      </li>
-                    </ul>
-                  </div>
-                </article>
-
-                <article class="timeline-row dark-row">
-                  <div class="timeline-meta">
-                    <p>Smart Marketing</p>
-                    <span data-i18n="smartPeriod">February 2025</span>
-                  </div>
-
-                  <div class="timeline-copy">
-                    <h3 data-i18n="smartRole">SEO Intern</h3>
-                    <ul class="plain-list bullets">
-                      <li data-i18n="smart1">Cleaned semantic core data.</li>
-                      <li data-i18n="smart2">Clustered search queries.</li>
-                      <li data-i18n="smart3">Analyzed search query frequency.</li>
-                    </ul>
-                  </div>
-                </article>
-              </div>
-            </div>
+        <div class="proj-card">
+          <div class="proj-top">
+            <span class="proj-name">Tonfotos</span>
+            <span class="proj-type">Photo archive software</span>
+          </div>
+          <p class="proj-desc">Developed a multilingual SEO strategy and built semantic cores across languages. Managed link building outreach with partner companies and launched a guerrilla marketing campaign on Reddit. Handled recruitment through Fiverr. Currently ongoing.</p>
+          <div class="proj-tags">
+            <span>SEO</span>
+            <span>Link Building</span>
+            <span>Outreach</span>
+            <span>Reddit</span>
+            <span>Fiverr</span>
+            <span>VS Code</span>
           </div>
         </div>
-      </article>
-    </section>
-  </main>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <span class="proj-name">Exlibris</span>
+            <span class="proj-type">Video game · classic literature</span>
+          </div>
+          <p class="proj-desc">Full marketing lifecycle for a literary video game startup. Launched and managed targeted advertising on VK and Telegram, created all social media content and tracked KPIs, then designed and published a landing page on Tilda.</p>
+          <div class="proj-tags">
+            <span>SMM</span>
+            <span>Targeted Ads</span>
+            <span>VK</span>
+            <span>Telegram</span>
+            <span>Tilda</span>
+            <span>Landing Page</span>
+          </div>
+        </div>
+
+        <div class="proj-card">
+          <div class="proj-top">
+            <span class="proj-name">Smart Marketing</span>
+            <span class="proj-type">SEO agency · internship</span>
+          </div>
+          <p class="proj-desc">Hands-on SEO internship at a marketing agency. Worked on cleaning and structuring semantic cores, clustering search queries, and analysing search frequency data across client projects.</p>
+          <div class="proj-tags">
+            <span>SEO</span>
+            <span>Semantic Core</span>
+            <span>Query Clustering</span>
+            <span>Frequency Analysis</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
