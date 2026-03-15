@@ -1,6 +1,15 @@
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ════ Custom hand cursor ════ */
+* {
+  cursor: url('https://raw.githubusercontent.com/aniibi-coder/anna-test/main/hand1.png') 12 4, auto !important;
+}
+
+a, button, .f-tab, .proj-card, .dot-item, .chip, .tool-tags span {
+  cursor: url('https://raw.githubusercontent.com/aniibi-coder/anna-test/main/hand2.png') 12 4, pointer !important;
+}
+
 :root {
   --c-bg:       #e8e0d2;
   --c-main:     #211e19;
@@ -383,6 +392,9 @@ body::after {
   .proj-meta-grid { grid-template-columns: repeat(2, auto); }
   .key-hint { display: none; }
 }
+
+
+
 
 
 
