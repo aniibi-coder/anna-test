@@ -3,11 +3,11 @@
 
 /* ════ Custom hand cursor ════ */
 * {
-  cursor: url('https://raw.githubusercontent.com/aniibi-coder/anna-test/main/hand1.png') 12 4, auto !important;
+  cursor: url('hand1.png') 12 4, auto !important;
 }
 
 a, button, .f-tab, .proj-card, .dot-item, .chip, .tool-tags span {
-  cursor: url('https://raw.githubusercontent.com/aniibi-coder/anna-test/main/hand2.png') 12 4, pointer !important;
+  cursor: url('hand2.png') 12 4, pointer !important;
 }
 
 :root {
@@ -392,6 +392,11 @@ body::after {
   .proj-meta-grid { grid-template-columns: repeat(2, auto); }
   .key-hint { display: none; }
 }
+
+
+
+
+
 
 
 
