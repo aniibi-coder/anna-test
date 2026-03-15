@@ -13,20 +13,34 @@
 
   <div class="stage">
 
-    <!-- Folder 1: Main -->
+    <!-- ── Folder 1: Main ── -->
     <div class="folder f-main" data-id="main" data-pos="back">
       <div class="f-tab" onclick="openFolder('main')"><span class="f-label">main</span></div>
       <div class="f-body">
         <div class="f-scroll">
 
           <div class="hero">
-            <h1>Anna<br>Gudkova</h1>
-            <p class="hero-title">Marketing Manager</p>
-            <p class="hero-bio">Digital Marketing Manager with one year of experience in the IT industry. Specialising in brand promotion across SEO, social media, and PPC advertising. Open to remote, hybrid, and office roles.</p>
-            <div class="hero-contacts">
-              <a href="mailto:gudkova158@gmail.com">gudkova158@gmail.com</a>
-              <span class="dot">·</span>
-              <a href="https://linkedin.com/in/anna-gudkova10" target="_blank">@anna-gudkova10</a>
+            <!-- Photo clipped to folder, looks pinned with paperclip -->
+            <div class="hero-photo-wrap">
+              <div class="paperclip">
+                <svg width="22" height="60" viewBox="0 0 22 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11 4 C5 4 2 8 2 13 L2 47 C2 53 6 57 11 57 C16 57 20 53 20 47 L20 16 C20 11 17 8 13 8 C9 8 7 11 7 15 L7 44 C7 46 8.5 48 11 48 C13.5 48 15 46 15 44 L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                </svg>
+              </div>
+              <div class="hero-photo">
+                <div class="hero-photo-inner">AG</div>
+              </div>
+            </div>
+
+            <div class="hero-text">
+              <h1><span class="letter-reveal">Anna</span><br><span class="letter-reveal" style="animation-delay:0.18s">Gudkova</span></h1>
+              <p class="hero-title">Marketing Manager</p>
+              <p class="hero-bio">Digital Marketing Manager with one year of experience in the IT industry. Specialising in brand promotion across SEO, social media, and PPC advertising. Open to remote, hybrid, and office roles.</p>
+              <div class="hero-contacts">
+                <a href="mailto:gudkova158@gmail.com">gudkova158@gmail.com</a>
+                <span class="dot">·</span>
+                <a href="https://linkedin.com/in/anna-gudkova10" target="_blank">@anna-gudkova10</a>
+              </div>
             </div>
           </div>
 
@@ -74,7 +88,7 @@
       </div>
     </div>
 
-    <!-- Folder 2: About -->
+    <!-- ── Folder 2: About ── -->
     <div class="folder f-about" data-id="about" data-pos="mid">
       <div class="f-tab" onclick="openFolder('about')"><span class="f-label">about</span></div>
       <div class="f-body">
@@ -131,7 +145,7 @@
       </div>
     </div>
 
-    <!-- Folder 3: Projects -->
+    <!-- ── Folder 3: Projects ── -->
     <div class="folder f-projects" data-id="projects" data-pos="front">
       <div class="f-tab" onclick="openFolder('projects')"><span class="f-label">projects</span></div>
       <div class="f-body">
@@ -141,22 +155,58 @@
             <div class="proj-heading">Selected<br>work</div>
           </div>
 
-          <div class="proj-card">
-            <div class="proj-top"><span class="proj-name">Tonfotos</span><span class="proj-type">Photo archive software</span></div>
-            <p class="proj-desc">Multilingual SEO strategy and semantic core building. Link building outreach with partner companies. Guerrilla marketing on Reddit and recruitment via Fiverr. Currently ongoing.</p>
+          <!-- Expandable project cards -->
+          <div class="proj-card" onclick="toggleCard(this)">
+            <div class="proj-top">
+              <span class="proj-name">Tonfotos</span>
+              <span class="proj-type">Photo archive software</span>
+            </div>
+            <div class="proj-summary">Multilingual SEO, link building, guerrilla marketing on Reddit.</div>
+            <div class="proj-expand">
+              <p class="proj-desc">Developed a multilingual SEO strategy and built semantic cores across languages. Managed link building outreach with partner companies and launched a guerrilla marketing campaign on Reddit. Handled recruitment through Fiverr. Currently ongoing.</p>
+              <div class="proj-meta-grid">
+                <div class="proj-meta-item"><div class="proj-meta-label">Role</div><div class="proj-meta-val">Marketing Manager</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Duration</div><div class="proj-meta-val">Mar 2025 — present</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Status</div><div class="proj-meta-val">Ongoing</div></div>
+              </div>
+            </div>
             <div class="proj-tags"><span>SEO</span><span>Link Building</span><span>Outreach</span><span>Reddit</span><span>Fiverr</span><span>VS Code</span></div>
+            <div class="proj-toggle-hint">tap to expand</div>
           </div>
 
-          <div class="proj-card">
-            <div class="proj-top"><span class="proj-name">Exlibris</span><span class="proj-type">Video game · classic literature</span></div>
-            <p class="proj-desc">Full marketing lifecycle for a literary video game startup. Targeted advertising on VK and Telegram, social media content and KPI tracking, plus a landing page on Tilda.</p>
+          <div class="proj-card" onclick="toggleCard(this)">
+            <div class="proj-top">
+              <span class="proj-name">Exlibris</span>
+              <span class="proj-type">Video game · classic literature</span>
+            </div>
+            <div class="proj-summary">Full marketing lifecycle for a literary video game startup.</div>
+            <div class="proj-expand">
+              <p class="proj-desc">Full marketing lifecycle for a startup developing a video game about classic literature. Launched and managed targeted advertising on VK and Telegram, created all social media content and tracked KPIs, then designed and published a landing page on Tilda.</p>
+              <div class="proj-meta-grid">
+                <div class="proj-meta-item"><div class="proj-meta-label">Role</div><div class="proj-meta-val">Marketing Manager</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Duration</div><div class="proj-meta-val">Sep — Nov 2025</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Type</div><div class="proj-meta-val">Project-based</div></div>
+              </div>
+            </div>
             <div class="proj-tags"><span>SMM</span><span>Targeted Ads</span><span>VK</span><span>Telegram</span><span>Tilda</span><span>Landing Page</span></div>
+            <div class="proj-toggle-hint">tap to expand</div>
           </div>
 
-          <div class="proj-card">
-            <div class="proj-top"><span class="proj-name">Smart Marketing</span><span class="proj-type">SEO agency · internship</span></div>
-            <p class="proj-desc">Cleaned and structured semantic cores, clustered search queries, and analysed search frequency data across multiple client projects.</p>
+          <div class="proj-card" onclick="toggleCard(this)">
+            <div class="proj-top">
+              <span class="proj-name">Smart Marketing</span>
+              <span class="proj-type">SEO agency · internship</span>
+            </div>
+            <div class="proj-summary">Semantic core cleanup, clustering, frequency analysis.</div>
+            <div class="proj-expand">
+              <p class="proj-desc">Hands-on SEO internship at a marketing agency. Worked on cleaning and structuring semantic cores, clustering search queries by intent, and analysing search frequency data across client projects.</p>
+              <div class="proj-meta-grid">
+                <div class="proj-meta-item"><div class="proj-meta-label">Role</div><div class="proj-meta-val">SEO Intern</div></div>
+                <div class="proj-meta-item"><div class="proj-meta-label">Duration</div><div class="proj-meta-val">Feb 2025</div></div>
+              </div>
+            </div>
             <div class="proj-tags"><span>SEO</span><span>Semantic Core</span><span>Query Clustering</span><span>Frequency Analysis</span></div>
+            <div class="proj-toggle-hint">tap to expand</div>
           </div>
 
         </div>
@@ -165,8 +215,16 @@
 
   </div>
 
+  <!-- Dot nav -->
+  <div class="dot-nav">
+    <div class="dot-item" data-target="main"   onclick="openFolder('main')"></div>
+    <div class="dot-item" data-target="about"  onclick="openFolder('about')"></div>
+    <div class="dot-item" data-target="projects" onclick="openFolder('projects')"></div>
+  </div>
+
+  <!-- Keyboard hint -->
+  <div class="key-hint">1 · 2 · 3</div>
+
   <script src="script.js"></script>
 </body>
 </html>
-
-
